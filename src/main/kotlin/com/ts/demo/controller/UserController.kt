@@ -2,6 +2,7 @@ package com.ts.demo.controller
 
 import com.ts.demo.domain.Order
 import com.ts.demo.service.OrderService
+import kotlinx.coroutines.flow.Flow
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
@@ -19,7 +20,7 @@ class UserController(
 //    }
 
     @GetMapping("/{id}/orders")
-    fun getAllUserOrders(@PathVariable id: Int): Flux<Order> {
+    suspend fun getAllUserOrders(@PathVariable id: Int): Flow<Order> {
         return orderService.getAllOrdersByUserId(id);
     }
 

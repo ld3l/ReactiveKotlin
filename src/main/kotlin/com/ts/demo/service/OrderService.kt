@@ -2,6 +2,7 @@ package com.ts.demo.service
 
 import com.ts.demo.domain.Order
 import com.ts.demo.repository.OrderRepository
+import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Flux
@@ -18,11 +19,11 @@ class OrderService(
         return orderRepo.save(order)
     }
 
-    fun getAllOrdersByUserId(id: Int): Flux<Order> {
+    suspend fun getAllOrdersByUserId(id: Int): Flow<Order> {
         return orderRepo.findAllByUserId(id)
     }
 
-    fun getOrderByOrderNumber(order_num:Int):Mono<Order> = orderRepo.findByOrderNumber(order_num)
+    suspend fun getOrderByOrderNumber(order_num:Int):Flow<Order> = orderRepo.findByOrderNumber(order_num)
 
 
 }
